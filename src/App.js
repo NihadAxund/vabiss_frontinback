@@ -29,7 +29,6 @@ async function loginUser(email, password, fullname) {
   try {
       const response = await fetch('https://farmsaasapi.onrender.com/auth/login', {
           method: 'POST',
-          credentials: 'include', 
           headers: {
               'Content-Type': 'application/json',
           },
@@ -38,6 +37,7 @@ async function loginUser(email, password, fullname) {
               password: password,
               fullname: fullname
           }),
+          credentials: 'include'
       });
 
       const responseData = await response.json();
@@ -68,7 +68,7 @@ async function getAllGeoLines() {
   try {
       const cookies = getAuthTokenFromCookie();
       console.log(cookies);
-      const response = await fetch('https://farmsaasapi.onrender.com/api-docs/geo/getallgeo', {
+      const response = await fetch('https://farmsaasapi.onrender.com/geo/getallgeo', {
           method: 'GET',
           credentials: 'include',
           withCredentials: true,
@@ -90,7 +90,6 @@ async function getAllGeoLines() {
       console.error('An error occurred:', error.message);
   }
 }
-
 
 //getAllGeoLines();
 
