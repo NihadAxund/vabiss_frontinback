@@ -27,7 +27,7 @@ export default App;
 
 async function loginUser(email, password, fullname) {
   try {
-      const response = await fetch('https://farmsaasapi.onrender.com/auth/login', {
+      const response = await fetch('http://localhost:8080/auth/login', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ async function loginUser(email, password, fullname) {
 }
 
 
-//loginUser("User@gmail.com", "User123A4$", "User");
+loginUser("User@gmail.com", "User123A4$", "User");
 
 
 
@@ -114,8 +114,8 @@ async function postCrop() {
             "geometry": {
                 "type": "LineString",
                 "coordinates": [
-                  [332414,3342372],
-                  [132214,5542325]
+                  [532414,5342372],
+                  [532214,6542325]
                 ]
             }
         }),
@@ -134,4 +134,48 @@ async function postCrop() {
 }
 
 
-postCrop()
+//postCrop()
+
+
+
+async function putCrop() {
+  try {
+      const response = await fetch('https://farmsaasapi.onrender.com/geo/updategeoline?Id=65d47c0de703863db82da586', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+            },
+          credentials: 'include',
+          withCredentials: true,
+          body: JSON.stringify({
+            "name":"taxıl",
+            "country":"Azerbaycan",
+            "city":"Absheron",
+            "area": 453,
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                  [33333333,44444444],
+                  [11111111,22222222]
+                ]
+            }
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log("---------------------------")
+      if (response.ok && responseData.success) {
+          console.log(responseData);
+      } else {
+          console.error("Login failed:", responseData.error);
+      }
+      console.log(responseData);
+  } catch (e){
+      console.error("catch error");
+  }
+}
+
+
+putCrop();
