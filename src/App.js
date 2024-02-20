@@ -56,7 +56,7 @@ async function loginUser(email, password, fullname) {
 }
 
 
-loginUser("User@gmail.com", "User123A4$", "User");
+//loginUser("User@gmail.com", "User123A4$", "User");
 
 
 
@@ -95,3 +95,43 @@ async function getAllGeoLines() {
 
 
 
+async function postCrop() {
+  try {
+      const response = await fetch('https://farmsaasapi.onrender.com/geo/addgeo', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+            },
+          credentials: 'include',
+          withCredentials: true,
+          body: JSON.stringify({
+            "name":"abseron zeytun 1",
+            "country":"Azerbaycan",
+            "city":"Absheron",
+            "area":453,
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                  [332414,3342372],
+                  [132214,5542325]
+                ]
+            }
+        }),
+      });
+
+      const responseData = await response.json();
+      if (response.ok && responseData.success) {
+          console.log("---------------------------")
+          console.log(responseData.data);
+      } else {
+          console.error("Login failed:", responseData.error);
+      }
+  } catch (e){
+      console.error("catch error");
+  }
+}
+
+
+postCrop()
